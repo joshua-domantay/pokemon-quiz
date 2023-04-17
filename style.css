@@ -1,0 +1,47 @@
+body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.wrapper {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: orange;
+}
+
+.wrapperQuiz {
+    width: 94%;
+    margin: 3%;
+    padding: 0;
+    background-color: brown;
+}
+
+h1, h2, p {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    background-color: yellow;
+}
+
+.question {
+    display: flex;
+    width: 100%;
+}
+
+.question img {
+    flex: 0 0 30%;
+}
+
+.question .answers {
+    display: flex;
+    flex: 0 0 65%;
+    padding: 2.5%;
+    align-items: center;
+}
+
+[class*="answerOption"] {
+    flex: 0 0 28.33%;
+    padding: 2.5%;
+}

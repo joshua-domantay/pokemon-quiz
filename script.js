@@ -1,0 +1,1 @@
+const maxPokemon = 1008;    // As of 4/16/2023, there are 1008 Pokemons

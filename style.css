@@ -24,6 +24,12 @@ h1, h2, p {
     background-color: yellow;
 }
 
+.startButton {
+    width: fit-content;
+    margin: 0 auto;
+    padding: 20px;
+}
+
 .question {
     display: flex;
     width: 100%;

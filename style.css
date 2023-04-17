@@ -15,7 +15,6 @@ body {
     width: 94%;
     margin: 3%;
     padding: 0;
-    background-color: brown;
 }
 
 h1, h2, p {
@@ -28,6 +27,7 @@ h1, h2, p {
 .question {
     display: flex;
     width: 100%;
+    background-color: brown;
 }
 
 .question img {

@@ -5,6 +5,7 @@ let allTypes = [];
 let allPokemons = []
 let allPokemonsSingleType = []
 let pokemonQuestions = []
+let pokemonQnA = []
 
 function getAllPokemonTypes() {
     fetch(`https://pokeapi.co/api/v2/type`)
@@ -49,13 +50,14 @@ function getSingleTypePokemons() {
     }
 }
 
-function createQuestion(pokemon) {
+function createQuestion(pokemon, index) {
     fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`)
         .then((response) => response.json())
         .then((data) => {
             // Get 3 options (answers) randomized
             let options = ["", "", ""];
-            options[Math.floor(Math.random() * 3)] = data.types[0].type.name.toUpperCase();
+            let answerIndex = Math.floor(Math.random() * 3);
+            options[answerIndex] = data.types[0].type.name.toUpperCase();
             for(let i = 0; i < options.length; i++) {
                 if(options[i] == "") {
                     let newOption = "";
@@ -72,36 +74,78 @@ function createQuestion(pokemon) {
                 }
             }
 
-            document.querySelector(".wrapperQuiz").innerHTML += `
-            <div class="question" style="margin-top: 3%;">
-                <img alt="test image"
-                    src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${data.id}.png" />
+            let questionArr = [
+                `<div class="question" id="question`,
+                `" style="display: none; margin-top: 3%;">
+                    <img id="img`,
+                `" alt="test image"
+                        src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${data.id}.png" />
 
-                <div class="answers">
-                    <div class="answerOption1">
-                        <p>${options[0]}</p>
-                    </div>
+                    <div class="answers">
+                        <div class="answerOption1" id="answer1For`,
+                `">
+                            <p>${options[0]}</p>
+                        </div>
 
-                    <div class="answerOption2">
-                        <p>${options[1]}</p>
-                    </div>
+                        <div class="answerOption2" id="answer2For`,
+                `">
+                            <p>${options[1]}</p>
+                        </div>
 
-                    <div class="answerOption3">
-                        <p>${options[2]}</p>
+                        <div class="answerOption3" id="answer3For`,
+                `">
+                            <p>${options[2]}</p>
+                        </div>
                     </div>
-                </div>
-            </div>
-            `;
+                </div>`
+            ];
+
+            pokemonQnA.push({
+                question: questionArr,
+                answer: answerIndex
+            });
         })
-        .then(() => { document.getElementById("startButton").style.display = "none"; })
         .catch((err) => {
             console.log("Pokemon not found", err);
         });
 }
 
+function showQuestions() {
+    for(let i = 0; i < pokemonQnA.length; i++) {
+        let toShow = "";
+        for(let j = 0; j < (pokemonQnA[i].question.length - 1); j++) {
+            toShow += pokemonQnA[i].question[j];
+            toShow += `${i}`;
+        }
+        toShow += pokemonQnA[i].question[(pokemonQnA[i].question.length - 1)];
+        document.querySelector(".wrapperQuiz").innerHTML += toShow;
+    }
+}
+
+function animateQuestions() {
+    let delay = 0;
+    for(let i = 0; i < pokemonQnA.length; i++) {
+        setTimeout(function() {
+            document.getElementById(`question${i}`).style.display = "flex";
+            let question = popmotion.styler(document.querySelector(`#question${i}`));
+            popmotion.tween({
+                from: {
+                    scale: .6,
+                    opacity: 0
+                },
+                to: {
+                    scale: 1,
+                    opacity: 1
+                },
+                duration: 1000,
+            }).start(question.set);
+        }, delay);
+        delay += 500;
+    }
+}
+
 function getQuestions(n) {
     while(n > 0) {
-        console.log(allPokemonsSingleType.length);
         let pokemon = Math.floor(Math.random() * allPokemonsSingleType.length);
         if(!pokemonQuestions.includes(allPokemonsSingleType[pokemon])) {
             createQuestion(allPokemonsSingleType[pokemon]);
@@ -112,7 +156,26 @@ function getQuestions(n) {
 }
 
 function startQuiz() {
+    document.getElementById("startButton").innerText = "Loading...";
+
+    let startButton = popmotion.styler(document.querySelector(".startButton"));
+    popmotion.tween({
+        from: {
+            scale: .7
+        },
+        to: {
+            scale: 1
+        },
+        duration: 1000,
+        flip: Infinity
+    }).start(startButton.set);
+
     setTimeout(function() { getQuestions(numQuestions) }, delayBeforeStart);
+    setTimeout(function() {
+        document.getElementById("startButton").style.display = "none";
+        showQuestions(numQuestions);
+        animateQuestions();
+    }, (delayBeforeStart * 2));
 }
 
 function start() {

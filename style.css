@@ -12,12 +12,12 @@ body {
 }
 
 .wrapperQuiz {
-    width: 94%;
-    margin: 3%;
+    width: 86%;
+    margin: 7%;
     padding: 0;
 }
 
-h1, h2, p {
+h1, h2, h3, p {
     margin: 0;
     padding: 0;
     text-align: center;
@@ -32,22 +32,67 @@ h1, h2, p {
 
 .question {
     display: flex;
+    flex-direction: column;
     width: 100%;
     background-color: brown;
 }
 
 .question img {
-    flex: 0 0 30%;
+    flex: 0 0 100%;
 }
 
-.question .answers {
+.answers {
     display: flex;
-    flex: 0 0 65%;
-    padding: 2.5%;
+    flex-direction: column;
+    flex: 0 0 95%;
+    padding: 2.5% 10% 10%;
     align-items: center;
 }
 
 [class*="answerOption"] {
     flex: 0 0 28.33%;
-    padding: 2.5%;
+    width: 100%;
+    padding: 2.5% 0;
+}
+
+footer {
+    align-items: center;
+}
+
+/* Tablet Landscape Screen Sizes */
+@media only screen and (min-width: 480px) {
+    .question {
+        flex-direction: column;
+    }
+
+    .question img {
+        flex: 0 0 30%;
+    }
+
+    .answers {
+        flex-direction: row;
+        flex: 0 0 65%;
+        padding: 2.5%;
+    }
+    
+    [class*="answerOption"] {
+        padding: 2.5%;
+    }
+}
+
+/* Desktop screen Sizes */
+@media only screen and (min-width: 650px) {
+    .wrapperQuiz {
+        width: 94%;
+        margin: 3%;
+        padding: 0;
+    }
+
+    .question {
+        flex-direction: row;
+    }
+
+    .answers {
+        flex-direction: row;
+    }
 }

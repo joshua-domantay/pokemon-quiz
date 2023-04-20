@@ -14,7 +14,7 @@ h1, h2, h3, p {
     text-align: center;
 }
 
-h1 { font-size: 2rem; }
+h1 { font-size: 1.75rem; }
 h2 { font-size: 1.5rem; }
 h3 { font-size: 1.25rem; }
 p { font-size: 1rem; }
@@ -23,7 +23,7 @@ p { font-size: 1rem; }
     width: 100%;
     max-width: 800px;
     margin: 0 auto;
-    background-color: #E2E2E2;
+    background-color: #CCCCCC;
 }
 
 .wrapperQuiz {
@@ -34,6 +34,20 @@ p { font-size: 1rem; }
 
 header {
     background-color: white;
+    border-bottom: solid 4px #EAEAEA;
+}
+
+header .imgHolder {
+    width: fit-content;
+    margin: 0 auto;
+}
+
+header .imgHolder img {
+    width: 270px;
+}
+
+header h1 {
+    padding: 5px 10% 16px;
 }
 
 .startButton {
@@ -41,15 +55,17 @@ header {
     margin: 0 auto;
     padding: 20px;
     cursor: pointer;
-    background-color: yellow;
+    background-color: #FFCC01;
+    border: solid 7px #375DA9;
 }
 
 .question {
     display: none;      /* Set to flex on showQuestions() */
     flex-direction: column;
-    width: 100%;
+    width: calc(100% - 20px);
     margin-top: 7%;
-    background-color: brown;
+    background-color: #FFCC01;
+    border: solid 10px #375DA9;
 }
 
 .question .imgHolder {
@@ -68,23 +84,33 @@ header {
     padding: 2.5% 10% 10%;
     align-items: center;
 }
+/* border: solid 4px #375DA9; */
 
 [class*="answerOption"] {
     flex: 0 0 95;
     width: 100%;
     margin: 5% 2.5% 0;
-    padding: 5px 0;
-    background-color: yellow;
+    background-color: #375DA9;
     cursor: pointer;
 }
 
 [class*="answerOption"] p {
-    font-size: 1.25rem;
+    margin: 4%;
+    padding: 5px 0;
+    font-size: 1.15rem;
     font-weight: bold;
+    background-color: white;
 }
 
 footer {
+    background-color: white;
+    border-top: solid 4px #EAEAEA;
+    padding: 0 10% 50px;
     align-items: center;
+}
+
+footer h3 {
+    padding: 16px 0 5px;
 }
 
 /* Tablet Landscape Screen Sizes */
@@ -108,6 +134,10 @@ footer {
     [class*="answerOption"] {
         flex: 0 0 28.33%;
         margin: 0 2.5%;
+    }
+
+    [class*="answerOption"] p {
+        margin: 5%;
         padding: 20px 0;
     }
 }

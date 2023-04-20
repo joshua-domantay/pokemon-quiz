@@ -50,6 +50,12 @@ header h1 {
     padding: 5px 10% 16px;
 }
 
+.startContainer {
+    display: flex;
+    align-items: center;
+    height: 250px;
+}
+
 .startButton {
     width: fit-content;
     margin: 0 auto;
@@ -57,6 +63,12 @@ header h1 {
     cursor: pointer;
     background-color: #FFCC01;
     border: solid 7px #375DA9;
+}
+
+.pokeBallLoading {
+    display: none;
+    width: 20%;
+    margin: auto;
 }
 
 .question {
@@ -115,6 +127,10 @@ footer h3 {
 
 /* Tablet Landscape Screen Sizes */
 @media only screen and (min-width: 480px) {
+    .pokeBallLoading {
+        width: 10%;
+    }
+
     .question {
         flex-direction: column;
         margin-top: 7%;

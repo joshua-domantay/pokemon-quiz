@@ -210,13 +210,17 @@ function getQuestions(n) {
 function startQuiz() {
     document.getElementById("startButton").innerText = "Loading...";
 
-    let startButton = popmotion.styler(document.querySelector(".startButton"));
+    document.getElementById("startButton").style.display = "none";
+    document.getElementById("pokeBallLoading").style.display = "block";
+    let startButton = popmotion.styler(document.querySelector(".pokeBallLoading"));
     popmotion.tween({
         from: {
-            scale: .7
+            x: -100,
+            rotate: -300
         },
         to: {
-            scale: 1
+            x: 100,
+            rotate: 600
         },
         duration: 1000,
         flip: Infinity
@@ -224,7 +228,7 @@ function startQuiz() {
 
     setTimeout(function() { getQuestions(numQuestions) }, delayBeforeStart);
     setTimeout(function() {
-        document.getElementById("startButton").style.display = "none";
+        document.getElementById("startContainer").style.display = "none";
         showQuestions(numQuestions);
         animateQuestions();
         setAnswersOnClick();

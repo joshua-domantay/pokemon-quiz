@@ -5,6 +5,7 @@ let allTypes = [];
 let allPokemons = []
 let allPokemonsSingleType = []
 let pokemonQuestions = []
+let pokemonQuestionsClicked = []
 let pokemonQnA = []
 
 function getAllPokemonTypes() {
@@ -84,17 +85,17 @@ function createQuestion(pokemon, index) {
                     </div>
 
                     <div class="answers">
-                        <div class="answerOption1" id="answer1For`,
+                        <div class="answerOption0" id="answer0For`,
                 `">
                             <p>${options[0]}</p>
                         </div>
 
-                        <div class="answerOption2" id="answer2For`,
+                        <div class="answerOption1" id="answer1For`,
                 `">
                             <p>${options[1]}</p>
                         </div>
 
-                        <div class="answerOption3" id="answer3For`,
+                        <div class="answerOption2" id="answer2For`,
                 `">
                             <p>${options[2]}</p>
                         </div>
@@ -146,6 +147,55 @@ function animateQuestions() {
     }
 }
 
+function setAnswersOnClick() {
+    for(let i = 0; i < pokemonQnA.length; i++) {
+        pokemonQuestionsClicked[i] = false;
+        for(let j = 0; j < 3; j++) {    // 3 answers/options
+            document.getElementById(`answer${j}For${i}`).addEventListener(
+                "click",
+                function() { answerOnClick((j == pokemonQnA[i].answer), i); },
+                false);
+        }
+    }
+}
+
+function answerOnClick(correct, index) {
+    if(pokemonQuestionsClicked[index]) { return; }
+
+    // Remove cursor pointer for 3 answers/options
+    for(let j = 0; j < 3; j++) {    // 3 answers/options
+        document.getElementById(`answer${j}For${index}`).style.cursor = "default";
+    }
+
+    if(correct) {
+        let img = popmotion.styler(document.getElementById(`img${index}`));
+        popmotion.tween({
+            from: {
+                rotate: -25
+            },
+            to: {
+                rotate: 25
+            },
+            duration: 500,
+            flip: Infinity
+        }).start(img.set);
+    } else {
+        let img = popmotion.styler(document.getElementById(`img${index}`));
+        popmotion.tween({
+            from: {
+                x: 0,
+                opacity: 1
+            },
+            to: {
+                x: -125,
+                opacity: 0
+            },
+            duration: 1000,
+        }).start(img.set);
+    }
+    pokemonQuestionsClicked[index] = true;
+}
+
 function getQuestions(n) {
     while(n > 0) {
         let pokemon = Math.floor(Math.random() * allPokemonsSingleType.length);
@@ -177,6 +227,7 @@ function startQuiz() {
         document.getElementById("startButton").style.display = "none";
         showQuestions(numQuestions);
         animateQuestions();
+        setAnswersOnClick();
     }, (delayBeforeStart * 2));
 }
 

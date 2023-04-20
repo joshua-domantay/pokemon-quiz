@@ -4,19 +4,8 @@ body {
     padding: 0;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 16px;
-}
-
-.wrapper {
-    width: 100%;
-    max-width: 800px;
-    margin: 0 auto;
-    background-color: orange;
-}
-
-.wrapperQuiz {
-    width: 86%;
-    margin: 7%;
-    padding: 0;
+    overflow-x: hidden;
+    background-color: #383838;
 }
 
 h1, h2, h3, p {
@@ -29,6 +18,23 @@ h1 { font-size: 2rem; }
 h2 { font-size: 1.5rem; }
 h3 { font-size: 1.25rem; }
 p { font-size: 1rem; }
+
+.wrapper {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #E2E2E2;
+}
+
+.wrapperQuiz {
+    width: 86%;
+    margin: 7%;
+    padding: 0;
+}
+
+header {
+    background-color: white;
+}
 
 .startButton {
     width: fit-content;

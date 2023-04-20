@@ -76,10 +76,12 @@ function createQuestion(pokemon, index) {
 
             let questionArr = [
                 `<div class="question" id="question`,
-                `" style="display: none; margin-top: 3%;">
-                    <img id="img`,
+                `">
+                    <div class="imgHolder">
+                        <img id="img`,
                 `" alt="test image"
-                        src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${data.id}.png" />
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${data.id}.png" />
+                    </div>
 
                     <div class="answers">
                         <div class="answerOption1" id="answer1For`,

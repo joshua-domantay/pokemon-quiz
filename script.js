@@ -1,6 +1,6 @@
 const maxPokemon = 1008;            // As of 4/16/2023, PokeAPI has sprites for 1008 Pokemons
 const numQuestions = 10;
-const delayBeforeStart = 3000;      // To let website fetch more data before starting the quiz
+const delayBeforeStart = 3500;      // To let website fetch more data before starting the quiz
 let allTypes = [];
 let allPokemons = []
 let allPokemonsSingleType = []
@@ -207,6 +207,11 @@ function getQuestions(n) {
     }
 }
 
+function initializeQuiz() {
+    getAllPokemonTypes();
+    getAllPokemons();
+}
+
 function startQuiz() {
     document.getElementById("startButton").innerText = "Loading...";
 
@@ -226,6 +231,8 @@ function startQuiz() {
         flip: Infinity
     }).start(startButton.set);
 
+    initializeQuiz();
+
     setTimeout(function() { getQuestions(numQuestions) }, delayBeforeStart);
     setTimeout(function() {
         document.getElementById("startContainer").style.display = "none";
@@ -238,10 +245,6 @@ function startQuiz() {
 function start() {
     document.getElementById("startButton").addEventListener("click", startQuiz, false);
 }
-
-// Get all Pokemon types
-getAllPokemonTypes();
-getAllPokemons();
 
 // Start
 window.addEventListener("load", start, false);
